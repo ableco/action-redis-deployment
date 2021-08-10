@@ -1,0 +1,17 @@
+name: Test
+
+on:
+  push
+
+jobs:
+  deploy:
+    name: Test the Redis Deployment Action
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Deploy Redis
+        uses: ableco/action-redis-deployment@v1
+        with:
+          redis-version: 6
+          redis-server: ${{ secrets.REDIS_MASTER_HOST }}
+          instance-name: redis-action-test
+          instance-port: 30001

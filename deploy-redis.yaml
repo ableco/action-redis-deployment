@@ -1,0 +1,20 @@
+- hosts: all
+  gather_facts: False
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+  - name: run redis
+    docker_container:
+      name: "{{ instance_name }}"
+      image: redis:6-alpine
+      state: started
+      detach: True
+      restart_policy: always
+      ports:
+        - "{{ instance_port }}:6379"
+      volumes:
+      - /var/lib/redis
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  become_method: sudo

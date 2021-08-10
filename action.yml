@@ -1,0 +1,22 @@
+name: 'Redis Deployment'
+description: 'Deploy Redis in an EC2 instance'
+inputs:
+  redis-server:
+    description: 'Redis server'
+    required: true
+  redis-version:
+    description: 'Redis version'
+    required: true
+    default: '6'
+  instance-name:
+    description: 'Redis instance name'
+    required: true
+  instance-port:
+    description: 'Redis instance port'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: echo "${{ secrets.REDIS_MASTER_SSH_KEY }}" > redis.pem
+    - run: chmod 600 redis.pem
+    - run: ansible-playbook ${{ github.action_path }}/deploy-redis.yaml -i ${{ inputs.redis-server }}, --key-file "redis.pem" -e "instance_name=${{ inputs.instance-name }}" -e "instance_port=${{ instance-port }}"
