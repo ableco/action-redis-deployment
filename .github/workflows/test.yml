@@ -15,3 +15,4 @@ jobs:
           redis-server: ${{ secrets.REDIS_MASTER_HOST }}
           instance-name: redis-action-test
           instance-port: 30001
+          ssh-key: ${{ secrets.REDIS_SSH_KEY }}

@@ -14,10 +14,13 @@ inputs:
   instance-port:
     description: 'Redis instance port'
     required: true
+  ssh-key:
+    description: 'Redis instance ssh key'
+    required: true
 runs:
   using: "composite"
   steps:
-    - run: echo "${{ secrets.REDIS_MASTER_SSH_KEY }}" > redis.pem
+    - run: echo "${{ inputs.ssh-key }}" > redis.pem
       shell: bash
     - run: chmod 600 redis-server.pem
       shell: bash
