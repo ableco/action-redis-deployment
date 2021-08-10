@@ -8,11 +8,8 @@ inputs:
     description: 'Redis version'
     required: true
     default: '6'
-  instance-name:
-    description: 'Redis instance name'
-    required: true
-  instance-port:
-    description: 'Redis instance port'
+  event-number:
+    description: 'Pull Request number'
     required: true
   ssh-key:
     description: 'Redis instance ssh key'
@@ -26,5 +23,5 @@ runs:
       shell: bash
     - run: pwd 
       shell: bash
-    - run: ansible-playbook ${{ github.action_path }}/deploy-redis.yaml -i ${{ inputs.redis-server }}, --key-file "redis-server.pem" -e "instance_name=${{ inputs.instance-name }}" -e "instance_port=${{ inputs.instance-port }}"
+    - run: ansible-playbook ${{ github.action_path }}/deploy-redis.yaml -i ${{ inputs.redis-server }}, --key-file "redis-server.pem" -e "instance_name=redis-pr-${{ inputs.event-number }}" -e "instance_port=${{ 30000 + inputs.instance-port }}"
       shell: bash

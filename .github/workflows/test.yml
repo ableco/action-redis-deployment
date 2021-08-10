@@ -13,6 +13,5 @@ jobs:
         with:
           redis-version: 6
           redis-server: ${{ secrets.REDIS_MASTER_HOST }}
-          instance-name: redis-action-test
-          instance-port: 30001
+          event-number: 25
           ssh-key: ${{ secrets.REDIS_SSH_KEY }}
