@@ -24,5 +24,5 @@ runs:
       shell: bash
     - run: chmod 600 redis-server.pem
       shell: bash
-    - run: ansible-playbook ${{ github.action_path }}/deploy-redis.yaml -i ${{ inputs.redis-server }}, --key-file "redis-server.pem" -e "instance_name=${{ inputs.instance-name }}" -e "instance_port=${{ instance-port }}"
+    - run: ansible-playbook ${{ github.action_path }}/deploy-redis.yaml -i ${{ inputs.redis-server }}, --key-file "redis-server.pem" -e "instance_name=${{ inputs.instance-name }}" -e "instance_port=${{ inputs.instance-port }}"
       shell: bash
