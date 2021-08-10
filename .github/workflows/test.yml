@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Deploy Redis
-        uses: ableco/action-redis-deployment@v1
+        uses: ableco/action-redis-deployment
         with:
           redis-version: 6
           redis-server: ${{ secrets.REDIS_MASTER_HOST }}
