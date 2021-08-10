@@ -18,5 +18,5 @@ runs:
   using: "composite"
   steps:
     - run: echo "${{ secrets.REDIS_MASTER_SSH_KEY }}" > redis.pem
-    - run: chmod 600 redis.pem
+    - run: chmod 600 redis-server.pem
     - run: ansible-playbook ${{ github.action_path }}/deploy-redis.yaml -i ${{ inputs.redis-server }}, --key-file "redis-server.pem" -e "instance_name=${{ inputs.instance-name }}" -e "instance_port=${{ instance-port }}"
