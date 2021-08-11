@@ -11,13 +11,13 @@ jobs:
       - name: Deploy Redis
         uses: ableco/action-redis-deployment@main
         with:
+          command: deploy
           redis-version: 6
           redis-server: ${{ secrets.REDIS_MASTER_HOST }}
           redis-password: ${{ secrets.REDIS_MASTER_PASSWORD }}
-          event-number: 25
           ssh-key: ${{ secrets.REDIS_SSH_KEY }}
           prefix: redis-test
-          command: deploy
+          event-number: 25
   destroy:
     name: Test the Redis Deployment Action (destroy)
     runs-on: ubuntu-20.04
@@ -26,6 +26,7 @@ jobs:
       - name: Destroy Redis
         uses: ableco/action-redis-deployment@main
         with:
-          event-number: 25
-          prefix: redis-test
           command: destroy
+          redis-server: ${{ secrets.REDIS_MASTER_HOST }}
+          prefix: redis-test
+          event-number: 25
