@@ -8,6 +8,9 @@ inputs:
     description: 'Redis version'
     required: true
     default: '6'
+  redis-password:
+    description: 'Redis password'
+    required: true
   event-number:
     description: 'Pull Request number'
     required: true
