@@ -3,7 +3,9 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3
   tasks:
-  - name: run redis
+  - name: create redis instance
+    tags:
+      - deploy 
     docker_container:
       name: "{{ instance_name }}"
       image: redis:{{ redis_version }}-alpine
@@ -15,6 +17,12 @@
         - "{{ instance_port }}:6379"
       volumes:
       - /data
+  - name: delete redis instance
+    tags:
+      - destroy
+    docker_container:
+      name: "{{ instance_name }}"
+      state: absent
   remote_user: ubuntu
   become: yes
   become_user: root
