@@ -28,5 +28,6 @@ jobs:
         with:
           command: destroy
           redis-server: ${{ secrets.REDIS_MASTER_HOST }}
+          ssh-key: ${{ secrets.REDIS_SSH_KEY }}
           prefix: redis-test
           event-number: 25
