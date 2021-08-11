@@ -7,15 +7,14 @@
     docker_container:
       name: "{{ instance_name }}"
       image: redis:6-alpine
+      command: redis-server --requirepass ${{ redis_password }}
       state: started
       detach: True
       restart_policy: always
       ports:
         - "{{ instance_port }}:6379"
       volumes:
-      - /var/lib/redis
-      env:
-        REDIS_PASSWORD: "{{ redis_password}}"
+      - /data
   remote_user: ubuntu
   become: yes
   become_user: root
