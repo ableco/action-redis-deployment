@@ -8,7 +8,8 @@ jobs:
     name: Test the Redis Deployment Action (deploy)
     runs-on: ubuntu-20.04
     steps:
-      - name: Deploy Redis
+      - id: deploy-redis
+        name: Deploy Redis
         uses: ableco/action-redis-deployment@main
         with:
           command: deploy
@@ -18,6 +19,8 @@ jobs:
           ssh-key: ${{ secrets.REDIS_SSH_KEY }}
           prefix: redis-test
           event-number: 25
+      - run: echo ${{ steps.deploy-redis.redis-port }}
+        shell: bash
   destroy:
     name: Test the Redis Deployment Action (destroy)
     runs-on: ubuntu-20.04
