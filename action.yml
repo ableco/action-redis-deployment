@@ -1,8 +1,8 @@
 name: 'Redis Deployment'
 description: 'Deploy Redis in an EC2 instance'
 inputs:
-  instance:
-    description: 'Instance'
+  prefix:
+    description: 'Instance prefix'
     required: true
     default: 'redis-app'
   redis-server:
@@ -32,5 +32,5 @@ runs:
       shell: bash
     - run: echo "REDIS_PORT=$((30000 + ${{ inputs.event-number }}))" >> "$GITHUB_ENV"
       shell: bash
-    - run: ansible-playbook ${{ github.action_path }}/deploy-redis.yaml -i ${{ inputs.redis-server }}, --key-file "redis-server.pem" -e "instance_name=${{ instance }}-pr-${{ inputs.event-number }}" -e "instance_port=$REDIS_PORT" -e "redis_password=${{ inputs.redis-password }}"
+    - run: ansible-playbook ${{ github.action_path }}/deploy-redis.yaml -i ${{ inputs.redis-server }}, --key-file "redis-server.pem" -e "instance_name=${{ inputs.prefix }}-pr-${{ inputs.event-number }}" -e "instance_port=$REDIS_PORT" -e "redis_password=${{ inputs.redis-password }}"
       shell: bash
