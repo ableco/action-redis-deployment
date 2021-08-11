@@ -24,6 +24,10 @@ inputs:
   command:
     description: 'deploy/destroy'
     default: 'deploy'
+outputs:
+  redis-port:
+    description: 'Redis port'
+    value: ${{ steps.get-redis-port.redis-port }}
 runs:
   using: "composite"
   steps:
@@ -34,6 +38,9 @@ runs:
     - run: pwd 
       shell: bash
     - run: echo "REDIS_PORT=$((30000 + ${{ inputs.event-number }}))" >> "$GITHUB_ENV"
+      shell: bash
+    - id: get-redis-port
+      run: echo "::set-output name=redis-port::$(echo $REDIS_PORT)"
       shell: bash
     - run: ansible-playbook ${{ github.action_path }}/deploy-redis.yaml -i ${{ inputs.redis-server }}, --key-file "redis-server.pem" -e "instance_name=${{ inputs.prefix }}-pr-${{ inputs.event-number }}" -e "instance_port=$REDIS_PORT" -e "redis_password=${{ inputs.redis-password }}" -e "redis_version=${{ inputs.redis-version }}" --tags "${{ inputs.command }}"
       shell: bash
