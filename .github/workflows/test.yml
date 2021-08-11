@@ -16,3 +16,4 @@ jobs:
           redis-password: ${{ secrets.REDIS_MASTER_PASSWORD }}
           event-number: 25
           ssh-key: ${{ secrets.REDIS_SSH_KEY }}
+          instance: redis-test
