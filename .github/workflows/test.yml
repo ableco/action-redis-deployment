@@ -13,5 +13,6 @@ jobs:
         with:
           redis-version: 6
           redis-server: ${{ secrets.REDIS_MASTER_HOST }}
+          redis-password: ${{ secrets.REDIS_MASTER_PASSWORD }}
           event-number: 25
           ssh-key: ${{ secrets.REDIS_SSH_KEY }}

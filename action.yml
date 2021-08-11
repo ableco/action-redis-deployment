@@ -25,5 +25,5 @@ runs:
       shell: bash
     - run: echo "REDIS_PORT=$((30000 + ${{ inputs.event-number }}))" >> "$GITHUB_ENV"
       shell: bash
-    - run: ansible-playbook ${{ github.action_path }}/deploy-redis.yaml -i ${{ inputs.redis-server }}, --key-file "redis-server.pem" -e "instance_name=redis-pr-${{ inputs.event-number }}" -e "instance_port=$REDIS_PORT"
+    - run: ansible-playbook ${{ github.action_path }}/deploy-redis.yaml -i ${{ inputs.redis-server }}, --key-file "redis-server.pem" -e "instance_name=redis-pr-${{ inputs.event-number }}" -e "instance_port=$REDIS_PORT" -e "redis_password=$REDIS_PASSWORD"
       shell: bash
