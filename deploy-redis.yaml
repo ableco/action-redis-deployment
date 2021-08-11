@@ -7,7 +7,7 @@
     docker_container:
       name: "{{ instance_name }}"
       image: redis:6-alpine
-      command: redis-server --requirepass ${{ redis_password }}
+      command: redis-server --requirepass {{ redis_password }}
       state: started
       detach: True
       restart_policy: always
