@@ -19,7 +19,7 @@ jobs:
           ssh-key: ${{ secrets.REDIS_SSH_KEY }}
           prefix: redis-test
           event-number: 25
-      - run: echo ${{ steps.deploy-redis.redis-port }}
+      - run: echo ${{ steps.deploy-redis.outputs.redis-port }}
         shell: bash
   destroy:
     name: Test the Redis Deployment Action (destroy)
