@@ -27,7 +27,7 @@ inputs:
 outputs:
   redis-port:
     description: 'Redis port'
-    value: ${{ steps.get-redis-port.redis-port }}
+    value: ${{ steps.get-redis-port.outputs.redis-port }}
 runs:
   using: "composite"
   steps:
@@ -35,7 +35,7 @@ runs:
       shell: bash
     - run: chmod 600 redis-server.pem
       shell: bash
-    - run: pwd 
+    - run: pwd
       shell: bash
     - run: echo "REDIS_PORT=$((30000 + ${{ inputs.event-number }}))" >> "$GITHUB_ENV"
       shell: bash
