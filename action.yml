@@ -46,6 +46,7 @@ runs:
       run: echo "::set-output name=redis-port::$(echo $REDIS_PORT)"
       shell: bash
     - run: ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook ${{ github.action_path }}/deploy-redis.yaml -i ${{ inputs.redis-server }}, --key-file "redis-server.pem" -e "instance_name=${{ inputs.prefix }}-pr-${{ inputs.event-number }}" -e "instance_port=$REDIS_PORT" -e "redis_password=${{ inputs.redis-password }}" -e "redis_version=${{ inputs.redis-version }}" --tags "${{ inputs.command }}"
+      shell: bash
     - run: echo "REDIS_URL=redis://:${{ inputs.redis-password }}@${{ inputs.redis-server }}:$REDIS_PORT/0" >> $GITHUB_ENV
       shell: bash
     - id: get-redis-url
